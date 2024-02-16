@@ -1,13 +1,14 @@
-# Função para ler os dados do arquivo CSV
-def ler_dados_csv(nome_arquivo):
+import sys
+
+# Função para ler os dados do STDIN
+def ler_dados_csv():
     dados = []
-    with open(nome_arquivo, 'r') as arquivo:
-        # Ignorar o cabeçalho se houver
-        next(arquivo)
-        for linha in arquivo:
-            # Dividir a linha em colunas
-            colunas = linha.strip().split(',')
-            # Extrair os dados relevantes
+    for linha in sys.stdin:
+        # Dividir a linha em colunas
+        colunas = linha.strip().split(',')
+        if colunas[0] == "_id":
+            continue
+        else:
             dado = {
                 "_id": colunas[0],
                 "index": int(colunas[1]),
@@ -26,8 +27,8 @@ def ler_dados_csv(nome_arquivo):
             dados.append(dado)
     return dados
 
-# Ler os dados do arquivo CSV
-dados = ler_dados_csv('emd.csv')
+# Ler os dados do STDIN
+dados = ler_dados_csv()
 
 # Extrair as modalidades desportivas únicas
 modalidades = set()
