@@ -5,7 +5,7 @@ def main():
     pattern = r'(on|off|=|\d+)'
     list = []
     for linha in sys.stdin:
-        match = re.findall(pattern, linha)
+        match = re.findall(pattern, linha, flags = re.IGNORECASE)
         list.append(match)
     control = False
     sum = 0
